@@ -6,13 +6,13 @@
 }
 
 :root {
-    --primary-color: #e91e63;
-    --secondary-color: #c2185b;
-    --accent-color: #fce4ec;
+    --primary-color: #5e9a78;
+    --secondary-color: #3d7358;
+    --accent-color: #d6edd9;
     --text-dark: #333;
     --text-light: #666;
     --white: #fff;
-    --bg-light: #fff5f8;
+    --bg-light: #f2fbf5;
 }
 
 html {
@@ -33,11 +33,11 @@ body {
 }
 
 .script {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
 }
 
 .section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Infant', serif;
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 50px;
@@ -81,14 +81,14 @@ body {
 }
 
 .wedding-text {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
     font-size: 1.5rem;
     margin-bottom: 20px;
     letter-spacing: 3px;
 }
 
 .couple-names {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
     font-size: 4rem;
     margin-bottom: 20px;
 }
@@ -134,7 +134,7 @@ body {
 }
 
 .save-date .section-title {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
     font-size: 3rem;
 }
 
@@ -152,7 +152,7 @@ body {
 
 .date-number {
     display: block;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Infant', serif;
     font-size: 4rem;
     color: var(--secondary-color);
     font-weight: 600;
@@ -366,6 +366,8 @@ body {
     transition: transform 0.3s ease;
     height: 100%;
     width: 100%;
+    position: relative;
+    cursor: pointer;
 }
 
 .timeline-card:hover {
@@ -431,7 +433,7 @@ body {
 }
 
 .timeline-text h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Infant', serif;
     color: var(--secondary-color);
     margin-bottom: 12px;
     font-size: 1.2rem;
@@ -500,6 +502,9 @@ body {
     max-width: 400px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .event-card:hover {
@@ -523,7 +528,7 @@ body {
 }
 
 .event-card h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Infant', serif;
     font-size: 1.5rem;
     color: var(--secondary-color);
     margin-bottom: 20px;
@@ -557,14 +562,18 @@ body {
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     aspect-ratio: 4/3;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: transform 0.5s ease;
     cursor: pointer;
 }
 
-.gallery-item:hover {
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
     transform: scale(1.05);
 }
 
@@ -675,7 +684,7 @@ body {
 
 .wishes-list h3 {
     text-align: center;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Infant', serif;
     color: var(--secondary-color);
     margin-bottom: 30px;
 }
@@ -959,7 +968,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(233, 30, 99, 0.9), rgba(252, 228, 236, 0.95)),
+    background: linear-gradient(135deg, rgba(94, 154, 120, 0.9), rgba(214, 237, 217, 0.95)),
                 url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop') center/cover;
     display: flex;
     align-items: center;
@@ -981,7 +990,7 @@ body {
 }
 
 .welcome-text {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
     font-size: 1.5rem;
     margin-bottom: 15px;
     opacity: 0.9;
@@ -989,7 +998,7 @@ body {
 }
 
 .welcome-names {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
     font-size: 3.5rem;
     margin-bottom: 10px;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
@@ -1034,9 +1043,9 @@ body {
 .env-body {
     position: absolute;
     inset: 0;
-    background: linear-gradient(160deg, #fdf6f0 0%, #fceaef 100%);
+    background: linear-gradient(160deg, #f2fbf5 0%, #e8f5ed 100%);
     border-radius: 5px;
-    border: 1px solid rgba(220, 170, 185, 0.25);
+    border: 1px solid rgba(130, 185, 150, 0.25);
 }
 
 /* Side & bottom fold triangles */
@@ -1046,17 +1055,17 @@ body {
 }
 
 .env-fold-left {
-    background: linear-gradient(to top-right, #f5d0dc, transparent);
+    background: linear-gradient(to top-right, #c8e6d0, transparent);
     clip-path: polygon(0 0, 0 100%, 50% 58%);
 }
 
 .env-fold-right {
-    background: linear-gradient(to top-left, #f5d0dc, transparent);
+    background: linear-gradient(to top-left, #c8e6d0, transparent);
     clip-path: polygon(100% 0, 50% 58%, 100% 100%);
 }
 
 .env-fold-bottom {
-    background: linear-gradient(to top, #f8dae5, transparent);
+    background: linear-gradient(to top, #d4ece0, transparent);
     clip-path: polygon(0 100%, 50% 58%, 100% 100%);
 }
 
@@ -1064,7 +1073,7 @@ body {
 .env-flap {
     position: absolute;
     inset: -1px;
-    background: linear-gradient(160deg, #eab0c0, #d990a8);
+    background: linear-gradient(160deg, #9ccdaf, #6aab84);
     clip-path: polygon(0 0, 100% 0, 50% 62%);
     transform-origin: top center;
     transform: rotateX(0deg);
@@ -1085,9 +1094,9 @@ body {
     top: 14%;
     left: 50%;
     transform: translateX(-50%);
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
     font-size: 0.9rem;
-    color: rgba(194, 24, 91, 0.55);
+    color: rgba(61, 115, 88, 0.55);
     white-space: nowrap;
     z-index: 1;
     opacity: 0;
@@ -1107,7 +1116,7 @@ body {
     transform: translate(-50%, -50%);
     width: 58px;
     height: 58px;
-    background: radial-gradient(circle at 38% 38%, #e91e63 0%, #c2185b 55%, #880e4f 100%);
+    background: radial-gradient(circle at 38% 38%, #5e9a78 0%, #3d7358 55%, #2a5040 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1115,7 +1124,7 @@ body {
     z-index: 10;
     box-shadow:
         0 0 0 3px rgba(255, 255, 255, 0.45),
-        0 6px 22px rgba(233, 30, 99, 0.6);
+        0 6px 22px rgba(94, 154, 120, 0.6);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1123,11 +1132,11 @@ body {
     transform: translate(-50%, -50%) scale(1.12);
     box-shadow:
         0 0 0 4px rgba(255, 255, 255, 0.65),
-        0 10px 35px rgba(233, 30, 99, 0.85);
+        0 10px 35px rgba(94, 154, 120, 0.85);
 }
 
 .env-seal span {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
     color: white;
     font-size: 1.15rem;
     font-weight: 700;
@@ -1136,7 +1145,7 @@ body {
 
 /* CTA label */
 .envelope-cta {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
     font-size: 1.75rem;
     color: var(--white);
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
@@ -1314,10 +1323,12 @@ body {
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
 }
 
 .map-card h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Infant', serif;
     color: var(--secondary-color);
     margin-bottom: 15px;
     font-size: 1.3rem;
@@ -1429,14 +1440,12 @@ body {
 }
 
 /* Clickable images */
-.timeline-images img,
-.gallery-item {
+.timeline-images img {
     cursor: pointer;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.timeline-images img:hover,
-.gallery-item:hover {
+.timeline-images img:hover {
     opacity: 0.9;
 }
 
@@ -1535,22 +1544,20 @@ body {
     50% { transform: translateY(-20px); }
 }
 
-.person-image {
-    animation: floating 3s ease-in-out infinite;
-}
-
-.person-image:nth-child(2) {
-    animation-delay: 1.5s;
+.person-image:hover {
+    transform: scale(1.03);
+    transition: transform 0.4s ease;
 }
 
 /* Pulse animation for buttons */
 @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(233, 30, 99, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(94, 154, 120, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(94, 154, 120, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(94, 154, 120, 0); }
 }
 
-.btn-wish, .btn-direction, .envelope-hint {
+/* pulse chỉ áp dụng cho CTA chính */
+.btn-wish {
     animation: pulse 2s infinite;
 }
 
@@ -1601,14 +1608,15 @@ body {
     animation: wiggle 0.5s ease-in-out;
 }
 
-/* Glow effect for section titles */
+/* Glow effect for section titles — hover only */
 @keyframes glow {
-    0%, 100% { text-shadow: 0 0 5px rgba(233, 30, 99, 0.3); }
-    50% { text-shadow: 0 0 20px rgba(233, 30, 99, 0.6), 0 0 30px rgba(233, 30, 99, 0.4); }
+    0%, 100% { text-shadow: 0 0 5px rgba(94, 154, 120, 0.3); }
+    50% { text-shadow: 0 0 20px rgba(94, 154, 120, 0.6), 0 0 30px rgba(94, 154, 120, 0.4); }
 }
 
-.section-title {
-    animation: glow 3s ease-in-out infinite;
+.section-title:hover {
+    text-shadow: 0 0 18px rgba(94, 154, 120, 0.35);
+    transition: text-shadow 0.4s ease;
 }
 
 /* Parallax effect for hero */
@@ -1635,11 +1643,7 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Image zoom on hover */
-.gallery-item:hover {
-    transform: scale(1.05);
-}
-
+/* Image zoom on hover (gallery handled via .gallery-item img) */
 .timeline-images img:hover {
     transform: scale(1.05);
     z-index: 10;
