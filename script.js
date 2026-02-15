@@ -41,15 +41,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // BACK TO TOP BUTTON
     // ============================================
     const backToTopBtn = document.getElementById('backToTop');
-    if (backToTopBtn) {
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 500) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
-            }
-        });
-    }
+    const quickNav = document.getElementById('quickNav');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 500) {
+            if (backToTopBtn) backToTopBtn.classList.add('visible');
+            if (quickNav) quickNav.classList.add('visible');
+        } else {
+            if (backToTopBtn) backToTopBtn.classList.remove('visible');
+            if (quickNav) quickNav.classList.remove('visible');
+        }
+    });
 
     // ============================================
     // SMOOTH SCROLL

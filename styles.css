@@ -580,7 +580,7 @@ body {
 /* Gift Section */
 .gift-section {
     padding: 100px 0;
-    background: linear-gradient(135deg, #fff9f9 0%, #fff0f5 100%);
+    background: var(--white);
 }
 
 .gift-intro {
@@ -875,6 +875,54 @@ body {
 .back-to-top:hover {
     background: var(--secondary-color);
     transform: translateY(-5px);
+}
+
+/* Quick Nav Bar */
+.quick-nav {
+    position: fixed;
+    bottom: 95px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.quick-nav.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.quick-nav-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--white);
+    background: var(--primary-color);
+    font-size: 0.72rem;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.quick-nav-btn i {
+    font-size: 1rem;
+    width: 16px;
+    text-align: center;
+}
+
+.quick-nav-btn:hover {
+    background: var(--secondary-color);
+    transform: translateX(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive */
@@ -1408,7 +1456,7 @@ body {
 /* Map Section */
 .map-section {
     padding: 100px 0;
-    background: var(--white);
+    background: var(--bg-light);
 }
 
 .map-wrapper {
@@ -1426,7 +1474,7 @@ body {
 }
 
 .map-card {
-    background: var(--bg-light);
+    background: var(--white);
     padding: 30px;
     border-radius: 15px;
     text-align: center;
