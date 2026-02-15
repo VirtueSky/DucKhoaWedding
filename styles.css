@@ -577,6 +577,114 @@ body {
     transform: scale(1.05);
 }
 
+/* Gift Section */
+.gift-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #fff9f9 0%, #fff0f5 100%);
+}
+
+.gift-intro {
+    text-align: center;
+    color: var(--text-light);
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gift-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.gift-card {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    padding: 35px 30px;
+    text-align: center;
+    width: 280px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gift-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+.gift-card-header {
+    margin-bottom: 25px;
+}
+
+.gift-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-color);
+    margin-bottom: 12px;
+}
+
+.gift-card h3 {
+    font-family: var(--script-font, 'Dancing Script', cursive);
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+}
+
+.gift-name {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+.gift-bank {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.gift-stk {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.gift-qr img {
+    width: 100%;
+    max-width: 220px;
+    border-radius: 12px;
+    border: 2px solid var(--accent-color);
+}
+
+.qr-placeholder {
+    width: 220px;
+    height: 220px;
+    border: 2px dashed var(--accent-color);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    margin: 0 auto;
+}
+
+.qr-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    opacity: 0.5;
+}
+
+.qr-placeholder p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
 /* Guestbook Section */
 .guestbook {
     padding: 100px 0;
