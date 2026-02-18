@@ -186,36 +186,39 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================
-    // SCROLL ANIMATION
+    // SCROLL ANIMATION — Unified Element System
+    // ① anim-title  ② anim-fade-up  ③ anim-left/right  ④ gallery polaroid
     // ============================================
-    var observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-    var observer = new IntersectionObserver(function(entries) {
+    var animObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                
-                // Add animated class to children
-                var animateElements = entry.target.querySelectorAll('.animate-on-scroll');
-                animateElements.forEach(function(el) {
-                    el.classList.add('animated');
-                });
+                var el = entry.target;
+                var delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+                setTimeout(function() {
+                    el.classList.add('in-view');
+                }, delay);
+                animObserver.unobserve(el);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('section').forEach(function(section) {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(30px)';
-        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(section);
+    document.querySelectorAll('.anim-title, .anim-fade-up, .anim-left, .anim-right').forEach(function(el) {
+        animObserver.observe(el);
     });
 
-    var heroSection = document.querySelector('.hero');
-    if (heroSection) {
-        heroSection.style.opacity = '1';
-        heroSection.style.transform = 'translateY(0)';
-    }
+    // Legacy animate-on-scroll support (gift cards, etc.)
+    var legacyObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                legacyObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(function(el) {
+        legacyObserver.observe(el);
+    });
 
     // ============================================
     // MUSIC PLAYER
@@ -538,7 +541,12 @@ document.addEventListener('DOMContentLoaded', function() {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
                     var el = entry.target;
-                    var delay = parseInt(el.getAttribute('data-index'), 10) * 80;
+                    var index = parseInt(el.getAttribute('data-index'), 10) || 0;
+                    var rotation = (Math.random() * 8 - 4).toFixed(1);
+                    // Set CSS variable first, then trigger animation after a frame
+                    // so the keyframe `from` state can read the variable
+                    el.style.setProperty('--init-rotate', rotation + 'deg');
+                    var delay = Math.max(20, index * 120);
                     setTimeout(function() { el.classList.add('visible'); }, delay);
                     galleryObserver.unobserve(el);
                 }
