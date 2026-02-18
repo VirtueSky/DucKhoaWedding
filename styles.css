@@ -854,6 +854,49 @@ body {
     margin-bottom: 30px;
 }
 
+#wishes-container {
+    max-height: 520px;
+    overflow-y: auto;
+    padding-right: 8px;
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+#wishes-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+#wishes-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#wishes-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+    opacity: 0.6;
+}
+
+#wishes-container::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Fade mask top & bottom để gợi ý có thể scroll */
+.wishes-list {
+    position: relative;
+}
+
+.wishes-list::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--bg-light));
+    pointer-events: none;
+    border-radius: 0 0 15px 15px;
+}
+
 .wish-card {
     background: var(--white);
     padding: 25px;
