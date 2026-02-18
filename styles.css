@@ -768,6 +768,25 @@ body {
     margin-bottom: 25px;
 }
 
+.form-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 25px;
+}
+
+.form-group--quantity {
+    flex: 0 0 110px !important;
+}
+
+.form-group--quantity input {
+    text-align: center;
+}
+
 .form-group label {
     display: block;
     margin-bottom: 8px;

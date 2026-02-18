@@ -144,6 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
             var formData = {
                 name: document.getElementById('name').value.trim(),
                 attending: document.getElementById('attending').value,
+                side: document.getElementById('side').value,
+                quantity: parseInt(document.getElementById('quantity').value, 10) || 1,
                 message: document.getElementById('message').value.trim()
             };
 
