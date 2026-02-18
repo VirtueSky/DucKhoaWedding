@@ -552,29 +552,86 @@ body {
 }
 
 .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    column-count: 3;
+    column-gap: 16px;
 }
 
 .gallery-item {
-    overflow: hidden;
+    break-inside: avoid;
+    display: block;
+    margin-bottom: 16px;
     border-radius: 15px;
+    overflow: hidden;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    aspect-ratio: 4/3;
     cursor: pointer;
+    position: relative;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: box-shadow 0.3s ease, opacity 0.55s ease, transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Landscape items */
+.gallery-item:nth-child(1) img,
+.gallery-item:nth-child(3) img,
+.gallery-item:nth-child(4) img,
+.gallery-item:nth-child(6) img {
+    aspect-ratio: 4/3;
+}
+
+/* Portrait items — tạo visual variety */
+.gallery-item:nth-child(2) img,
+.gallery-item:nth-child(5) img {
+    aspect-ratio: 3/4;
 }
 
 .gallery-item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
     display: block;
+    object-fit: cover;
     transition: transform 0.5s ease;
 }
 
 .gallery-item:hover img {
-    transform: scale(1.05);
+    transform: scale(1.06);
+}
+
+.gallery-item:hover {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+}
+
+/* Hover overlay */
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 30%, rgba(0, 0, 0, 0.45));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 15px;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-zoom-icon {
+    width: 52px;
+    height: 52px;
+    color: #fff;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+    transform: scale(0.85);
+    transition: transform 0.25s ease;
+}
+
+.gallery-item:hover .gallery-zoom-icon {
+    transform: scale(1);
 }
 
 /* Gift Section */
@@ -929,7 +986,7 @@ body {
 /* Responsive */
 @media (max-width: 768px) {
     .couple-names {
-        font-size: 2.5rem;
+        font-size: min(2.5rem, 9vw);
     }
 
     .footer-names {
@@ -974,7 +1031,7 @@ body {
     }
     
     .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
+        column-count: 2;
     }
     
     .events-wrapper {
@@ -989,7 +1046,7 @@ body {
 
 @media (max-width: 480px) {
     .gallery-grid {
-        grid-template-columns: 1fr;
+        column-count: 1;
     }
     
     .date-display {
@@ -1550,11 +1607,8 @@ body {
 /* Lightbox */
 .lightbox {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.95);
+    inset: 0;
+    background: rgba(0, 0, 0, 0.93);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1569,36 +1623,113 @@ body {
     visibility: visible;
 }
 
-.lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-    border-radius: 10px;
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
+.lightbox-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 88vw;
+    max-height: 88vh;
 }
 
-.lightbox.active img {
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.lightbox-content img.loaded {
+    opacity: 1;
     transform: scale(1);
 }
 
-.lightbox-close {
+/* Shared button styles */
+.lightbox-btn {
     position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 3rem;
-    color: var(--white);
-    background: none;
-    border: none;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
     cursor: pointer;
-    transition: transform 0.3s ease, color 0.3s ease;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+    touch-action: manipulation;
     z-index: 10001;
 }
 
+.lightbox-btn svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.lightbox-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.lightbox-close {
+    top: 18px;
+    right: 18px;
+}
+
 .lightbox-close:hover {
-    color: var(--primary-color);
     transform: rotate(90deg);
+}
+
+.lightbox-prev {
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.lightbox-prev:hover {
+    transform: translateY(-50%) translateX(-2px);
+}
+
+.lightbox-next {
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.lightbox-next:hover {
+    transform: translateY(-50%) translateX(2px);
+}
+
+/* Hide nav buttons in single-image mode */
+.lightbox.single-mode .lightbox-prev,
+.lightbox.single-mode .lightbox-next,
+.lightbox.single-mode .lightbox-counter {
+    display: none;
+}
+
+.lightbox-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 5px 18px;
+    border-radius: 20px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .lightbox-prev { left: 8px; }
+    .lightbox-next { right: 8px; }
+    .lightbox-btn { width: 42px; height: 42px; }
 }
 
 /* Clickable images */
@@ -1790,7 +1921,6 @@ body {
 /* Smooth transitions for all interactive elements */
 .timeline-card,
 .event-card,
-.gallery-item,
 .wish-card,
 .map-card,
 .person-image img {
@@ -1866,6 +1996,7 @@ body {
 
 .groom-name {
     animation-delay: 0.2s;
+    white-space: nowrap;
 }
 
 .ampersand {
@@ -1874,6 +2005,7 @@ body {
 
 .bride-name {
     animation-delay: 0.6s;
+    white-space: nowrap;
 }
 
 /* Loading animation for images */

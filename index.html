@@ -263,12 +263,42 @@
         <div class="container">
             <h2 class="section-title">Album Ảnh</h2>
             <div class="gallery-grid">
-                <div class="gallery-item"><img src="Album/Img_Album_1.JPG" alt="Ảnh cưới Đức & Khoa 1" loading="lazy"></div>
-                <div class="gallery-item"><img src="Album/Img_Album_2.JPG" alt="Ảnh cưới Đức & Khoa 2" loading="lazy"></div>
-                <div class="gallery-item"><img src="Album/Img_Album_3.JPG" alt="Ảnh cưới Đức & Khoa 3" loading="lazy"></div>
-                <div class="gallery-item"><img src="Album/Img_Album_4.JPEG" alt="Ảnh cưới Đức & Khoa 4" loading="lazy"></div>
-                <div class="gallery-item"><img src="Album/Img_Album_5.JPG" alt="Ảnh cưới Đức & Khoa 5" loading="lazy"></div>
-                <div class="gallery-item"><img src="Album/Img_Album_6.JPG" alt="Ảnh cưới Đức & Khoa 6" loading="lazy"></div>
+                <div class="gallery-item" data-index="0">
+                    <img src="Album/Img_Album_1.JPG" alt="Ảnh cưới Đức & Khoa 1" loading="lazy">
+                    <div class="gallery-overlay">
+                        <svg class="gallery-zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="1">
+                    <img src="Album/Img_Album_2.JPG" alt="Ảnh cưới Đức & Khoa 2" loading="lazy">
+                    <div class="gallery-overlay">
+                        <svg class="gallery-zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="2">
+                    <img src="Album/Img_Album_3.JPG" alt="Ảnh cưới Đức & Khoa 3" loading="lazy">
+                    <div class="gallery-overlay">
+                        <svg class="gallery-zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="3">
+                    <img src="Album/Img_Album_4.JPEG" alt="Ảnh cưới Đức & Khoa 4" loading="lazy">
+                    <div class="gallery-overlay">
+                        <svg class="gallery-zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="4">
+                    <img src="Album/Img_Album_5.JPG" alt="Ảnh cưới Đức & Khoa 5" loading="lazy">
+                    <div class="gallery-overlay">
+                        <svg class="gallery-zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-index="5">
+                    <img src="Album/Img_Album_6.JPG" alt="Ảnh cưới Đức & Khoa 6" loading="lazy">
+                    <div class="gallery-overlay">
+                        <svg class="gallery-zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -449,9 +479,20 @@
     <div class="falling-flowers" id="fallingFlowers"></div>
 
     <!-- Image Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" id="lightboxClose">&times;</button>
-        <img src="" alt="Preview" id="lightboxImg">
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh">
+        <button class="lightbox-btn lightbox-close" id="lightboxClose" aria-label="Đóng">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <button class="lightbox-btn lightbox-prev" id="lightboxPrev" aria-label="Ảnh trước">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
+        </button>
+        <button class="lightbox-btn lightbox-next" id="lightboxNext" aria-label="Ảnh tiếp theo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,18 15,12 9,6"/></svg>
+        </button>
+        <div class="lightbox-content">
+            <img src="" alt="Preview" id="lightboxImg">
+        </div>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
     </div>
 
     <!-- Cursor Effect Container -->
