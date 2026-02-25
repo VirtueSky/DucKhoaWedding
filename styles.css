@@ -1991,10 +1991,16 @@ body {
     transition: text-shadow 0.4s ease;
 }
 
-/* Parallax effect for hero */
+/* Parallax effect for hero — disabled on mobile (iOS/Android don't support fixed attachment) */
 .hero {
     background-attachment: fixed;
     background-position: center;
+}
+
+@media (max-width: 1024px) {
+    .hero {
+        background-attachment: scroll;
+    }
 }
 
 /* Smooth transitions for all interactive elements */
