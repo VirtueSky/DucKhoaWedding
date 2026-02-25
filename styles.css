@@ -1078,6 +1078,20 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
+@media (max-width: 768px) {
+    .quick-nav-btn span {
+        display: none;
+    }
+
+    .quick-nav-btn {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        justify-content: center;
+        gap: 0;
+    }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .couple-names {
