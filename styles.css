@@ -1117,6 +1117,11 @@ body {
     .gallery-item {
         margin-bottom: 10px;
     }
+
+    /* Force uniform aspect ratio on mobile — keeps both columns even */
+    .gallery-item img {
+        aspect-ratio: 4/5 !important;
+    }
     
     .events-wrapper {
         flex-direction: column;
@@ -2209,4 +2214,35 @@ body {
     .anim-title.in-view {
         animation: none;
     }
+}
+
+/* ============================================
+   SECTION PHOTO BACKGROUNDS
+   Random album photo, faded behind each section
+   ============================================ */
+.section-photo-bg {
+    position: relative;
+}
+
+.section-photo-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--section-bg, none);
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 1.4s ease;
+}
+
+.section-photo-bg.bg-loaded::before {
+    opacity: 0.08;
+}
+
+/* Elevate all direct children above the bg layer */
+.section-photo-bg > * {
+    position: relative;
+    z-index: 1;
 }

@@ -534,6 +534,51 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { passive: true });
     }
 
+    // ============================================
+    // SECTION BACKGROUND PHOTOS
+    // ============================================
+    var sectionBgPool = [
+        'AbumAnhCuoi/BH_01560phong.jpg',
+        'AbumAnhCuoi/BH_01578phong.jpg',
+        'AbumAnhCuoi/BH_01712cc_(2).jpg',
+        'AbumAnhCuoi/BH_01749c_(2).jpg',
+        'AbumAnhCuoi/BH_01828cc_(2).jpg',
+        'AbumAnhCuoi/BH_01860_(2).jpg',
+        'AbumAnhCuoi/BH_01867_(2).jpg',
+        'AbumAnhCuoi/BH_01899_(2).jpg',
+        'AbumAnhCuoi/BH_01930_(2).jpg',
+        'AbumAnhCuoi/BH_01951_(2).jpg',
+        'AbumAnhCuoi/BH_02042_(2).jpg',
+        'AbumAnhCuoi/BH_02073_(2).jpg',
+        'AbumAnhCuoi/BH_02088_(2).jpg',
+        'AbumAnhCuoi/BH_02154_(2).jpg'
+    ];
+
+    function shuffleArray(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+        }
+        return a;
+    }
+
+    var bgTargetIds = ['save-date', 'couple', 'story', 'event', 'guestbook', 'gift', 'map'];
+    var shuffledBgImgs = shuffleArray(sectionBgPool);
+
+    bgTargetIds.forEach(function(id, i) {
+        var section = document.getElementById(id);
+        if (!section) return;
+        section.classList.add('section-photo-bg');
+        var imgSrc = shuffledBgImgs[i % shuffledBgImgs.length];
+        var preloader = new Image();
+        preloader.onload = function() {
+            section.style.setProperty('--section-bg', 'url("' + imgSrc + '")');
+            section.classList.add('bg-loaded');
+        };
+        preloader.src = imgSrc;
+    });
+
     // Gallery entrance animation (IntersectionObserver)
     var galleryItems = document.querySelectorAll('.gallery-item');
     if ('IntersectionObserver' in window && galleryItems.length) {
