@@ -57,7 +57,7 @@ body {
 /* Hero Section */
 .hero {
     height: 100vh;
-    background: url('AbumAnhCuoi/BH_01860_(2).jpg') center/cover no-repeat;
+    background: url('AbumAnhCuoi/BH_01860_(2).jpg') center 30%/cover no-repeat;
     position: relative;
     display: flex;
     align-items: center;
@@ -2043,7 +2043,7 @@ body {
 /* Parallax effect for hero — disabled on mobile (iOS/Android don't support fixed attachment) */
 .hero {
     background-attachment: fixed;
-    background-position: center;
+    background-position: center 10%;
 }
 
 @media (max-width: 1024px) {
