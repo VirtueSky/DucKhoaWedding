@@ -415,23 +415,44 @@ document.addEventListener('DOMContentLoaded', function() {
     var lightboxNext = document.getElementById('lightboxNext');
     var lightboxCounter = document.getElementById('lightboxCounter');
 
-    // Collect gallery images
+    // Collect gallery images (thumbnail for preview, full-res for lightbox)
     var galleryImages = [];
     document.querySelectorAll('.gallery-item').forEach(function(item) {
         var img = item.querySelector('img');
-        if (img) galleryImages.push({ src: img.src, alt: img.alt });
+        if (img) galleryImages.push({
+            src: img.getAttribute('data-full-src') || img.getAttribute('src'),
+            thumbnail: img.getAttribute('src'),
+            alt: img.alt
+        });
     });
 
     var currentIndex = 0;
+    var lightboxGeneration = 0; // prevents stale full-res loads from overwriting newer image
 
-    function setLightboxImage(src, alt) {
+    function setLightboxImage(src, alt, thumbnailSrc) {
         if (!lightboxImg) return;
         lightboxImg.classList.remove('loaded');
-        lightboxImg.onload = function() { lightboxImg.classList.add('loaded'); };
-        // If already cached, onload may not fire
-        lightboxImg.src = src;
         lightboxImg.alt = alt || 'Preview';
-        if (lightboxImg.complete) lightboxImg.classList.add('loaded');
+        lightboxGeneration++;
+        var gen = lightboxGeneration;
+
+        if (thumbnailSrc && thumbnailSrc !== src) {
+            // Show thumbnail immediately for instant display
+            lightboxImg.src = thumbnailSrc;
+            lightboxImg.classList.add('loaded');
+            // Load full-res in background, swap when ready
+            var fullImg = new Image();
+            fullImg.onload = function() {
+                if (lightboxGeneration === gen) {
+                    lightboxImg.src = src;
+                }
+            };
+            fullImg.src = src;
+        } else {
+            lightboxImg.onload = function() { lightboxImg.classList.add('loaded'); };
+            lightboxImg.src = src;
+            if (lightboxImg.complete) lightboxImg.classList.add('loaded');
+        }
     }
 
     function updateCounter() {
@@ -444,35 +465,36 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!lightbox || galleryImages.length === 0) return;
         currentIndex = ((index % galleryImages.length) + galleryImages.length) % galleryImages.length;
         lightbox.classList.remove('single-mode');
-        setLightboxImage(galleryImages[currentIndex].src, galleryImages[currentIndex].alt);
+        setLightboxImage(galleryImages[currentIndex].src, galleryImages[currentIndex].alt, galleryImages[currentIndex].thumbnail);
         updateCounter();
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
 
-    function openSingleLightbox(src, alt) {
+    function openSingleLightbox(src, alt, thumbnailSrc) {
         if (!lightbox) return;
         lightbox.classList.add('single-mode');
-        setLightboxImage(src, alt);
+        setLightboxImage(src, alt, thumbnailSrc);
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox() {
         if (!lightbox) return;
+        lightboxGeneration++; // cancel any pending full-res load
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
     }
 
     function showPrev() {
         currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-        setLightboxImage(galleryImages[currentIndex].src, galleryImages[currentIndex].alt);
+        setLightboxImage(galleryImages[currentIndex].src, galleryImages[currentIndex].alt, galleryImages[currentIndex].thumbnail);
         updateCounter();
     }
 
     function showNext() {
         currentIndex = (currentIndex + 1) % galleryImages.length;
-        setLightboxImage(galleryImages[currentIndex].src, galleryImages[currentIndex].alt);
+        setLightboxImage(galleryImages[currentIndex].src, galleryImages[currentIndex].alt, galleryImages[currentIndex].thumbnail);
         updateCounter();
     }
 
@@ -488,7 +510,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.timeline-images img').forEach(function(img) {
         img.addEventListener('click', function(e) {
             e.stopPropagation();
-            openSingleLightbox(img.src, img.alt);
+            var fullSrc = img.getAttribute('data-full-src') || img.getAttribute('src');
+            openSingleLightbox(fullSrc, img.alt, img.getAttribute('src'));
         });
     });
 
@@ -538,20 +561,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // SECTION BACKGROUND PHOTOS
     // ============================================
     var sectionBgPool = [
-        'AbumAnhCuoi/BH_01560phong.jpg',
-        'AbumAnhCuoi/BH_01578phong.jpg',
-        'AbumAnhCuoi/BH_01712cc_(2).jpg',
-        'AbumAnhCuoi/BH_01749c_(2).jpg',
-        'AbumAnhCuoi/BH_01828cc_(2).jpg',
-        'AbumAnhCuoi/BH_01860_(2).jpg',
-        'AbumAnhCuoi/BH_01867_(2).jpg',
-        'AbumAnhCuoi/BH_01899_(2).jpg',
-        'AbumAnhCuoi/BH_01930_(2).jpg',
-        'AbumAnhCuoi/BH_01951_(2).jpg',
-        'AbumAnhCuoi/BH_02042_(2).jpg',
-        'AbumAnhCuoi/BH_02073_(2).jpg',
-        'AbumAnhCuoi/BH_02088_(2).jpg',
-        'AbumAnhCuoi/BH_02154_(2).jpg'
+        'AbumAnhCuoi_Compress/BH_01560phong.jpg',
+        'AbumAnhCuoi_Compress/BH_01578phong.jpg',
+        'AbumAnhCuoi_Compress/BH_01712cc_(2).jpg',
+        'AbumAnhCuoi_Compress/BH_01749c_(2).jpg',
+        'AbumAnhCuoi_Compress/BH_01828cc_(2).jpg',
+        'AbumAnhCuoi_Compress/BH_01860_(2).jpg',
+        'AbumAnhCuoi_Compress/BH_01867_(2).jpg',
+        'AbumAnhCuoi_Compress/BH_01899_(2).jpg',
+        'AbumAnhCuoi_Compress/BH_01930_(2).jpg',
+        'AbumAnhCuoi_Compress/BH_01951_(2).jpg',
+        'AbumAnhCuoi_Compress/BH_02042_(2).jpg',
+        'AbumAnhCuoi_Compress/BH_02073_(2).jpg',
+        'AbumAnhCuoi_Compress/BH_02088_(2).jpg',
+        'AbumAnhCuoi_Compress/BH_02154_(2).jpg'
     ];
 
     function shuffleArray(arr) {
