@@ -122,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 { name: 'Nguyễn Văn A', message: 'Chúc hai bạn trăm năm hạnh phúc!', timestamp: new Date(Date.now() - 86400000).toISOString() },
                 { name: 'Trần Thị B', message: 'Chúc mừng hạnh phúc!', timestamp: new Date(Date.now() - 172800000).toISOString() }
             ];
+            sampleWishes.sort(function(a, b) { return new Date(a.timestamp) - new Date(b.timestamp); });
             sampleWishes.forEach(function(wish) { addWishToDisplay(wish); });
             return;
         }
@@ -129,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(GOOGLE_SCRIPT_URL)
             .then(function(response) { return response.json(); })
             .then(function(wishes) {
-                wishes.sort(function(a, b) { return new Date(b.timestamp) - new Date(a.timestamp); });
+                wishes.sort(function(a, b) { return new Date(a.timestamp) - new Date(b.timestamp); });
                 wishes.forEach(function(wish) { addWishToDisplay(wish); });
             })
             .catch(function(error) { console.error('Error loading wishes:', error); });
