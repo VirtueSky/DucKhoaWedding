@@ -416,6 +416,48 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================
+    // GALLERY SHUFFLE
+    // ============================================
+    (function() {
+        var grid = document.querySelector('.gallery-grid');
+        if (!grid) return;
+        var items = Array.from(grid.querySelectorAll('.gallery-item'));
+        // Fisher-Yates shuffle
+        for (var i = items.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            grid.appendChild(items[j]);
+            var tmp = items[i]; items[i] = items[j]; items[j] = tmp;
+        }
+        // Re-assign data-index after shuffle so lightbox order matches
+        items = Array.from(grid.querySelectorAll('.gallery-item'));
+        items.forEach(function(item, idx) {
+            item.setAttribute('data-index', idx);
+        });
+    })();
+
+    // ============================================
+    // GALLERY ORIENTATION DETECTION
+    // ============================================
+    document.querySelectorAll('.gallery-item').forEach(function(item) {
+        var img = item.querySelector('img');
+        if (!img) return;
+        function applyOrientation() {
+            if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+                if (img.naturalHeight > img.naturalWidth) {
+                    item.classList.add('is-portrait');
+                } else {
+                    item.classList.add('is-landscape');
+                }
+            }
+        }
+        if (img.complete) {
+            applyOrientation();
+        } else {
+            img.addEventListener('load', applyOrientation);
+        }
+    });
+
+    // ============================================
     // IMAGE LIGHTBOX
     // ============================================
     var lightbox = document.getElementById('lightbox');
