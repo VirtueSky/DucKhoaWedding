@@ -403,6 +403,16 @@ document.addEventListener('DOMContentLoaded', function() {
             var walk = (x - startX) * 2;
             timelineScroll.scrollLeft = scrollLeft - walk;
         });
+
+        // Hide scroll hint once user has scrolled a bit
+        var scrollHint = document.getElementById('scrollHint');
+        if (scrollHint) {
+            timelineScroll.addEventListener('scroll', function() {
+                if (timelineScroll.scrollLeft > 60) {
+                    scrollHint.classList.add('hidden');
+                }
+            }, { passive: true });
+        }
     }
 
     // ============================================

@@ -321,12 +321,28 @@ body {
     padding: 20px 0 40px;
     -webkit-overflow-scrolling: touch;
     cursor: grab;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) rgba(94, 154, 120, 0.15);
+    padding-bottom: 16px;
 }
 
 .timeline-horizontal::-webkit-scrollbar {
-    display: none;
+    height: 5px;
+}
+
+.timeline-horizontal::-webkit-scrollbar-track {
+    background: rgba(94, 154, 120, 0.12);
+    border-radius: 10px;
+    margin: 0 40px;
+}
+
+.timeline-horizontal::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+.timeline-horizontal::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
 }
 
 .timeline-horizontal:active {
@@ -445,17 +461,86 @@ body {
     line-height: 1.7;
 }
 
-.scroll-hint {
-    text-align: center;
-    color: var(--text-light);
-    font-size: 0.9rem;
-    margin-top: 20px;
-    animation: fadeInOut 2s infinite;
+/* Scroll hint top (below intro text) */
+.scroll-hint-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 8px;
+    margin-bottom: 4px;
 }
 
-.scroll-hint i {
+.scroll-hint-top .scroll-hint-text {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+.scroll-hint-top .scroll-hint-arrows i {
     color: var(--primary-color);
-    margin: 0 5px;
+    font-size: 0.8rem;
+    animation: arrowSlide 1.2s ease-in-out infinite;
+}
+
+.scroll-hint-top .scroll-hint-arrows i:nth-child(2) { animation-delay: 0.15s; }
+.scroll-hint-top .scroll-hint-arrows i:nth-child(3) { animation-delay: 0.3s; }
+
+/* Timeline scroll wrapper + fade overlay */
+.timeline-scroll-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.timeline-fade-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, var(--bg-light));
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Scroll hint indicator */
+.scroll-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+    transition: opacity 0.5s ease;
+}
+
+.scroll-hint.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.scroll-hint-text {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+.scroll-hint-arrows {
+    display: flex;
+    gap: 2px;
+}
+
+.scroll-hint-arrows i {
+    color: var(--primary-color);
+    font-size: 0.8rem;
+    animation: arrowSlide 1.2s ease-in-out infinite;
+}
+
+.scroll-hint-arrows i:nth-child(2) { animation-delay: 0.15s; }
+.scroll-hint-arrows i:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes arrowSlide {
+    0%, 100% { opacity: 0.2; transform: translateX(0); }
+    50%       { opacity: 1;   transform: translateX(4px); }
 }
 
 @keyframes fadeInOut {
@@ -2014,9 +2099,6 @@ body {
     60% { transform: translateY(-5px); }
 }
 
-.scroll-hint {
-    animation: bounce 2s infinite;
-}
 
 /* Wiggle animation for music button */
 @keyframes wiggle {
